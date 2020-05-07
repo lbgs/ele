@@ -1,29 +1,26 @@
-# ele
+# 仿饿了么外卖
 
-## Project setup
+### 安装npm包
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 运行开发模式
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### 打包
 ```
 npm run build
 ```
 
-### Run your tests
+### 运行生成模式
 ```
 npm run test
 ```
 
-### Lints and fixes files
+### 修复
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).

@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 import router from './router.js'
 
 //按需组件
-import { Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem, Grid, GridItem, Tab, Tabs } from 'vant';
+import { Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem, Grid, GridItem, Tab, Tabs, Divider, Button } from 'vant';
 import 'vant/lib/index.css'
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -20,6 +20,8 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Tab);
 Vue.use(Tabs);
+Vue.use(Divider);
+Vue.use(Button);
 
 // 过滤器
 Vue.filter('distance', val => val >= 1000 ? `${val / 1000}km` : `${val}km`)

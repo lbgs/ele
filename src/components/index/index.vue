@@ -183,7 +183,7 @@ export default {
       topList: [
         {
           title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: "/img/logo.20bfbe33.jpg",
+          imgUrl: "../assets/images/logo.jpg",
           evaluate: 4.8,
           monthly: 448,
           standard: 15,
@@ -194,7 +194,7 @@ export default {
         },
         {
           title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: "/img/logo.20bfbe33.jpg",
+          imgUrl: "/img/logo.jpg",
           evaluate: 4.8,
           monthly: 448,
           standard: 15,
@@ -236,6 +236,7 @@ h1 {
       white-space: nowrap;
       overflow: hidden;
       position: relative;
+      font-size: 0.9rem;
     }
   }
 }

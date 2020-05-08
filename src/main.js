@@ -1,3 +1,8 @@
+/**
+ * author: 王荣华
+ * email: 18823547785@163.com
+ */
+
 import Vue from 'vue'
 import App from './App.vue'
 //路由

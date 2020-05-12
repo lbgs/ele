@@ -29,7 +29,8 @@ Vue.use(Divider);
 Vue.use(Button);
 
 // 过滤器
-Vue.filter('distance', val => val >= 1000 ? `${val / 1000}km` : `${val}km`)
+Vue.filter('distance', val => val >= 1000 ? `${val / 1000}km` : `${val}km`);
+Vue.filter('phone', item => item.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
 
 
 Vue.config.productionTip = false

@@ -6,12 +6,14 @@
     </div>
     <div class="info">
       <div class="left">
-        <div class="phone">188****7785</div>
+        <div class="phone">{{'18823547785' | phone}}</div>
         <div class="text">再忙，也要记得吃饭呦~</div>
         <van-button icon="coupon-o" round plain size="small">签到领10元红包</van-button>
       </div>
       <div class="right">
-        <div class="logo"></div>
+        <div class="logo">
+            <h1 style="color: white; text-align: center;">e</h1>
+        </div>
       </div>
     </div>
     <div class="money">
@@ -33,13 +35,13 @@
       </div>
     </div>
     <div class="list">
-      <div class="l-item">
+      <div class="l-item" v-for="item in list" :key="item.id">
         <div class="left alims">
           <van-icon name="like-o" color="blue" />
-          <span class="title">我的收藏</span>
+          <span class="title">{{item.title}}</span>
         </div>
         <div class="right alims">
-          <span class="txt">最高得15元</span>
+          <span class="txt">{{item.content}}</span>
           <van-icon name="arrow" />
         </div>
       </div>
@@ -48,7 +50,55 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      list: [
+        {
+          id: 0,
+          icon: "",
+          title: "我的收藏",
+          content: ""
+        },
+        {
+          id: 1,
+          icon: "",
+          title: "我的客服",
+          content: ""
+        },
+        {
+          id: 2,
+          icon: "",
+          title: "推荐有奖",
+          content: "最高得15元"
+        },
+        {
+          id: 3,
+          icon: "",
+          title: "商务合作",
+          content: ""
+        },
+        {
+          id: 4,
+          icon: "",
+          title: "办卡有礼",
+          content: ""
+        },
+        {
+          id: 5,
+          icon: "",
+          title: "企业订餐",
+          content: ""
+        }
+      ]
+    };
+  },
+  created(){
+      let item = '18823547785';
+      item = item.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2');
+      console.log(item)
+  }
+};
 </script>
 
 <style lang="scss" scope>
@@ -65,7 +115,6 @@ export default {};
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 10px 50px -20px #ccc;
   .left {
     .phone {
       font-size: 2rem;
@@ -89,27 +138,30 @@ export default {};
 .money {
   display: flex;
   justify-content: center;
-  margin-top: 5px;
+  margin: 20px 0;
   .m-item {
     flex: 1;
     height: 7vh;
-    border-radius: 3px;
+    border-radius: 5px;
     background-color: #fff;
-    margin: 0 5px;
+    margin: 0 2px;
     padding: 5px;
     font-size: 0.7rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 0 10px #ccc;
     .title {
       font-weight: bold;
       font-size: 0.9rem;
     }
     .text {
+      color: #999;
       span {
         color: darkorange;
         font-weight: bold;
-        font-size: 0.9rem;
+        font-size: 1rem;
+        margin-right: 5px;
       }
     }
   }
@@ -133,7 +185,7 @@ export default {};
   .right {
     span {
       font-size: 0.8rem;
-      color: #666;
+      color: #999;
     }
   }
 }

@@ -69,7 +69,7 @@ export default {
 .order-control {
   background-color: #f9f9f9;
   padding: 0 10px;
-  height: 100vh;
+  height: 92vh;
   h2{
       padding-left: 10px;
   }

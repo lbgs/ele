@@ -11,7 +11,11 @@ Vue.use(VueRouter);
 import router from './router.js'
 
 //按需组件
-import { Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem, Grid, GridItem, Tab, Tabs, Divider, Button } from 'vant';
+import {
+  Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem,
+  Grid, GridItem, Tab, Tabs, Divider, Button, Sidebar, SidebarItem, Card, TreeSelect,
+  Sticky,Tag 
+} from 'vant';
 import 'vant/lib/index.css'
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -27,6 +31,12 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(Divider);
 Vue.use(Button);
+Vue.use(Sidebar);
+Vue.use(SidebarItem);
+Vue.use(Card);
+Vue.use(TreeSelect);
+Vue.use(Sticky);
+Vue.use(Tag);
 
 // 过滤器
 Vue.filter('distance', val => val >= 1000 ? `${val / 1000}km` : `${val}km`);

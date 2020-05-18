@@ -1,8 +1,8 @@
 import VueRoute from 'vue-router';
-import index from './components/index/index.vue'
-import order from './components/order/index.vue'
-import my from './components/my/index.vue'
-import shop from './components/shop/index.vue'
+import index from './components/index.vue'
+import order from './components/order.vue'
+import my from './components/my.vue'
+import shop from './components/shop.vue'
 const router = new VueRoute({
     routes: [
         { path: '/', redirect: "/index" },

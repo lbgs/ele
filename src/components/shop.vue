@@ -39,34 +39,36 @@
       </div>
       <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
     </div>
-    <van-tabs v-model="active" swipeable animated>
+    <van-tabs v-model="active" swipeable animated sticky color="blue">
       <van-tab title="点餐">
-        <div class="food">
-          <van-sticky>
-            <van-sidebar v-model="activeKey" class="nav-left" @change="scrollTo">
-              <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
-            </van-sidebar>
-          </van-sticky>
-          <div class="food-control">
-            <div class="category" v-for="item in list" :key="item.id">
-              <van-sticky>
-                <p class="food-name">{{item.name}}</p>
-              </van-sticky>
-              <van-card
-                class="card"
-                v-for="items in item.data"
-                :key="items.id"
-                price="2.00"
-                desc="描述信息"
-                :title="items.name"
-                thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-              />
-            </div>
+        <van-sticky :offset-top="50">
+          <van-sidebar v-model="activeKey" class="nav-left" @change="scrollTo">
+            <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
+          </van-sidebar>
+        </van-sticky>
+        <div class="food-control">
+          <div class="category" v-for="item in list" :key="item.id">
+            <van-sticky>
+              <p class="food-name">{{item.name}}</p>
+            </van-sticky>
+            <van-card
+              class="card"
+              v-for="items in item.data"
+              :key="items.id"
+              price="2.00"
+              desc="描述信息"
+              :title="items.name"
+              thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
+            />
           </div>
         </div>
       </van-tab>
-      <van-tab title="评价">点餐</van-tab>
-      <van-tab title="商家">点餐</van-tab>
+      <van-tab title="评价" style="height:100vh">
+        <div class="review">点评</div>
+      </van-tab>
+      <van-tab title="商家" style="height:100vh">
+        <div class="merchant">商家</div>
+      </van-tab>
     </van-tabs>
   </div>
 </template>
@@ -298,6 +300,15 @@ export default {
 };
 </script>
  <style lang="scss" scope>
+ .fli{
+   width: 100px;
+   height: 100px;
+   background-color: red;
+   color: white;
+   position: fixed;
+   z-index: 555;
+   top: 100px;
+ }
 .shop {
   // background-color: cadetblue;
   .bg {

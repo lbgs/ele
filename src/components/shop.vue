@@ -39,16 +39,16 @@
       </div>
       <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
     </div>
-    <van-tabs v-model="active" swipeable animated sticky color="blue">
+    <van-tabs v-model="active" swipeable  sticky color="blue">
       <van-tab title="点餐">
-        <van-sticky :offset-top="50">
+        <van-sticky :offset-top="44">
           <van-sidebar v-model="activeKey" class="nav-left" @change="scrollTo">
             <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
           </van-sidebar>
         </van-sticky>
         <div class="food-control">
           <div class="category" v-for="item in list" :key="item.id">
-            <van-sticky>
+            <van-sticky :offset-top="44">
               <p class="food-name">{{item.name}}</p>
             </van-sticky>
             <van-card
@@ -65,6 +65,7 @@
       </van-tab>
       <van-tab title="评价" style="height:100vh">
         <div class="review">点评</div>
+        <meal></meal>
       </van-tab>
       <van-tab title="商家" style="height:100vh">
         <div class="merchant">商家</div>
@@ -72,7 +73,8 @@
     </van-tabs>
   </div>
 </template>
- <script>
+<script>
+import meal from "./meal.vue";
 export default {
   data() {
     return {
@@ -267,6 +269,9 @@ export default {
       active: 0
     };
   },
+  components: {
+    meal
+  },
   created() {},
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -300,15 +305,15 @@ export default {
 };
 </script>
  <style lang="scss" scope>
- .fli{
-   width: 100px;
-   height: 100px;
-   background-color: red;
-   color: white;
-   position: fixed;
-   z-index: 555;
-   top: 100px;
- }
+.fli {
+  width: 100px;
+  height: 100px;
+  background-color: red;
+  color: white;
+  position: fixed;
+  z-index: 555;
+  top: 100px;
+}
 .shop {
   // background-color: cadetblue;
   .bg {

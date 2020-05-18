@@ -45,7 +45,7 @@
     <van-tabs v-model="active" sticky>
       <van-tab title="推荐">
         <div v-for="item in topList" :key="item.id">
-          <div class="card">
+          <div class="card" @click="getShop(item.id)">
             <div class="img">
               <img :src="item.imgUrl" />
             </div>
@@ -63,7 +63,9 @@
                   <span class="rise">起送￥{{item.standard}}</span>
                   <span class="give">
                     {{ item.delivery.free ? `免配送费` : `配送`}}
-                    <span :class="item.delivery.free ? 'free' : ''">{{item.delivery.price}}</span>
+                    <span
+                      :class="item.delivery.free ? 'free' : ''"
+                    >{{item.delivery.price}}</span>
                   </span>
                 </div>
                 <div class="time-dis">
@@ -182,6 +184,7 @@ export default {
       ],
       topList: [
         {
+          id: 0,
           title: "太二酸菜鱼(奥体高德汇店)",
           imgUrl: "../assets/images/logo.jpg",
           evaluate: 4.8,
@@ -193,6 +196,7 @@ export default {
           tags: ["20减19", "120减51", "50减22"]
         },
         {
+          id: 1,
           title: "太二酸菜鱼(奥体高德汇店)",
           imgUrl: "/img/logo.jpg",
           evaluate: 4.8,
@@ -208,8 +212,15 @@ export default {
   },
   created: function() {},
   methods: {
+    //搜索
     getInput: function(el) {
       console.log(el);
+    },
+    //跳转到商店
+    getShop: function(id) {
+      console.log("跳转")
+      console.log(id)
+      this.$router.push({ path: 'shop', query: { id }})
     }
   },
   watch: {
@@ -284,8 +295,8 @@ h1 {
       span:last-of-type {
         margin: 0;
       }
-      .give{
-        .free{
+      .give {
+        .free {
           color: #ccc;
           text-decoration: line-through;
         }

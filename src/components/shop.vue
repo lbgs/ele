@@ -28,49 +28,55 @@
           <div class="btn">购买</div>
         </div>
       </div>
-      <div class="tag-control">
-        <div class="tags">
-          <van-tag plain type="danger">标签</van-tag>
+      <div :style="`height:${moveY}px`">
+        <div ref="show">
+          <div class="tag-control">
+            <div class="tags">
+              <van-tag plain type="danger">标签</van-tag>
+            </div>
+            <div class="residue">
+              <span>8个优惠</span>
+              <van-icon name="arrow-down" />
+            </div>
+          </div>
+          <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
         </div>
-        <div class="residue">
-          <span>8个优惠</span>
-          <van-icon name="arrow-down" />
+        <!-- 隐藏 -->
+        <div class="show" :style="`opacity: 0;`">
+          <div class="title">优惠</div>
+          <ul class="content">
+            <li v-for="item in 8" :key="item">
+              <van-tag plain type="danger">标签</van-tag>
+              <p class="txt">配送费立减2.4元</p>
+            </li>
+          </ul>
+          <div class="title">服务</div>
+          <ul class="content">
+            <li v-for="item in 2" :key="item">
+              <van-tag plain>标签</van-tag>
+              <p class="txt">支持订单极速退款</p>
+            </li>
+          </ul>
+          <div class="title">公告</div>
+          <div class="content">传承中华美味，专业提供质简餐！</div>
+          <div class="top-btn"></div>
         </div>
       </div>
-      <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
     </div>
-    <van-tabs v-model="active" swipeable  sticky color="blue">
-      <van-tab title="点餐">
-        <van-sticky :offset-top="44">
-          <van-sidebar v-model="activeKey" class="nav-left" @change="scrollTo">
-            <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
-          </van-sidebar>
-        </van-sticky>
-        <div class="food-control">
-          <div class="category" v-for="item in list" :key="item.id">
-            <van-sticky :offset-top="44">
-              <p class="food-name">{{item.name}}</p>
-            </van-sticky>
-            <van-card
-              class="card"
-              v-for="items in item.data"
-              :key="items.id"
-              price="2.00"
-              desc="描述信息"
-              :title="items.name"
-              thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-            />
-          </div>
-        </div>
-      </van-tab>
-      <van-tab title="评价" style="height:100vh">
-        <div class="review">点评</div>
-        <meal></meal>
-      </van-tab>
-      <van-tab title="商家" style="height:100vh">
-        <div class="merchant">商家</div>
-      </van-tab>
-    </van-tabs>
+    <!-- 点餐、评价、商家 -->
+    <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" class="move">
+      <van-tabs v-model="active" swipeable sticky color="blue">
+        <van-tab title="点餐">
+          <meal></meal>
+        </van-tab>
+        <van-tab title="评价" style="height:100vh">
+          <div class="review">点评</div>
+        </van-tab>
+        <van-tab title="商家" style="height:100vh">
+          <div class="merchant">商家</div>
+        </van-tab>
+      </van-tabs>
+    </div>
   </div>
 </template>
 <script>
@@ -78,233 +84,44 @@ import meal from "./meal.vue";
 export default {
   data() {
     return {
-      activeKey: 0,
       offsetTopArr: null,
-      list: [
-        {
-          id: 0,
-          name: "热销",
-          data: [
-            {
-              id: 0,
-              name: "叉烧烧鸭双拼-1",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 1,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            }
-          ]
-        },
-        {
-          id: 1,
-          name: "推荐",
-          data: [
-            {
-              id: 0,
-              name: "叉烧烧鸭双拼-2",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 1,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 2,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 3,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 4,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            }
-          ]
-        },
-        {
-          id: 2,
-          name: "招牌",
-          data: [
-            {
-              id: 0,
-              name: "叉烧烧鸭双拼-3",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 1,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 2,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 3,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 4,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            }
-          ]
-        },
-        {
-          id: 3,
-          name: "19元套餐",
-          data: [
-            {
-              id: 0,
-              name: "叉烧烧鸭双拼-4",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 1,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 2,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 3,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 4,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            }
-          ]
-        },
-        {
-          id: 4,
-          name: "29元套餐",
-          data: [
-            {
-              id: 0,
-              name: "叉烧烧鸭双拼-5",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 1,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 2,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 3,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            },
-            {
-              id: 4,
-              name: "叉烧烧鸭双拼",
-              desc: "描述信息",
-              price: 12,
-              icon: ""
-            }
-          ]
-        }
-      ],
-      active: 0
+      active: 0,
+      startY: 0,
+      moveY: 58
     };
   },
   components: {
     meal
   },
-  created() {},
-  mounted() {
-    window.addEventListener("scroll", this.onScroll);
-  },
-  destroy() {
-    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
-    window.removeEventListener("scroll", this.onScroll);
+  created(){
+    console.log(this.$refs)
   },
   methods: {
-    scrollTo: function(e) {
-      document.documentElement.scrollTop = this.offsetTopArr[e] + 1;
+    touchStart: function(el) {
+      // console.log(el.touches[0].screenY);
+      this.startY = el.touches[0].screenY;
     },
-    onScroll() {
-      // 滚动监听器
-      let navContents = document.querySelectorAll(".category");
-      let offsetTopArr = [];
-      navContents.forEach(item => {
-        offsetTopArr.push(item.offsetTop);
-      });
-      this.offsetTopArr = offsetTopArr;
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
-      let navIndex = 0;
-      offsetTopArr.forEach((item, index) => {
-        if (scrollTop >= item) {
-          this.activeKey = index;
-        }
-      });
+    touchMove: function(el) {
+      console.log(el.touches[0].screenY - this.startY);
+      let Y = el.touches[0].screenY - this.startY;
+      if (Y > 0) {
+        el.preventDefault();
+        this.moveY = Y + 58;
+      } else {
+        return true;
+      }
+    },
+    touchEnd: function(el) {
+      let y = 58;
+      this.moveY = this.moveY - y > 30 ? 500 : y;
     }
   }
 };
 </script>
  <style lang="scss" scope>
+.move {
+  position: relative;
+}
 .fli {
   width: 100px;
   height: 100px;
@@ -316,6 +133,7 @@ export default {
 }
 .shop {
   // background-color: cadetblue;
+  position: relative;
   .bg {
     position: relative;
     height: 100px;
@@ -364,17 +182,21 @@ export default {
     .volume {
       display: flex;
       justify-content: space-between;
+      margin: 5px 0;
       .piece {
         display: flex;
         .text,
         .btn {
           background-color: coral;
-          padding: 8px 4vw;
+          padding: 6px 3.5vw;
           font-size: 0.1rem;
           color: white;
         }
         .text {
           border-radius: 0 5px 5px 0;
+          span {
+            font-size: 1rem;
+          }
         }
         .btn {
           border-radius: 5px 0 0 5px;
@@ -397,6 +219,47 @@ export default {
       text-align: left;
       font-size: 10px;
       color: #666;
+    }
+    .show {
+      text-align: left;
+      .title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin: 10px 0;
+      }
+      .content {
+        li {
+          margin: 10px 0;
+          .txt {
+            display: inline-block;
+            margin-left: 10px;
+          }
+          span {
+            padding: 2px 3px;
+          }
+        }
+      }
+      .top-btn {
+        position: relative;
+        margin-top: 20px;
+        &::after,
+        &::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 50%;
+          width: 30px;
+          height: 5px;
+          background-color: #999;
+          border-radius: 10px;
+        }
+        &::after {
+          transform: translate(-100%) rotateZ(-20deg);
+        }
+        &::before {
+          transform: translateX(-20%) rotateZ(20deg);
+        }
+      }
     }
   }
   .nav-left {

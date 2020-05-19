@@ -84,10 +84,12 @@
       <van-tab title="果蔬商超">果蔬商超</van-tab>
       <van-tab title="到点自取">到点自取</van-tab>
     </van-tabs>
+    <tabBar></tabBar>
   </div>
 </template>
 
 <script>
+import tabBar from "./tabBar.vue";
 export default {
   data() {
     return {
@@ -210,6 +212,9 @@ export default {
       ]
     };
   },
+  components: {
+    tabBar
+  },
   created: function() {},
   methods: {
     //搜索
@@ -218,9 +223,9 @@ export default {
     },
     //跳转到商店
     getShop: function(id) {
-      console.log("跳转")
-      console.log(id)
-      this.$router.push({ path: 'shop', query: { id }})
+      console.log("跳转");
+      console.log(id);
+      this.$router.push({ path: "shop", query: { id } });
     }
   },
   watch: {
@@ -231,7 +236,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scope>
 h1 {
   padding: 0;
   margin: 0;

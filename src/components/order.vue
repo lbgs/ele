@@ -31,10 +31,12 @@
       </div>
     </div>
     <van-divider>仅展示近一年的外卖订单</van-divider>
+    <tabBar></tabBar>
   </div>
 </template>
 
 <script>
+import tabBar from './tabBar.vue'
 export default {
   data() {
     return {
@@ -61,6 +63,9 @@ export default {
         }
       ]
     };
+  },
+  components:{
+    tabBar
   }
 };
 </script>

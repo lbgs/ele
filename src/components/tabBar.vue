@@ -1,6 +1,13 @@
 <template>
-  <div id="app">
-    <router-view class>主页</router-view>
+  <div id="tabBar">
+    <van-tabbar v-model="active" :placeholder="true" :route="true">
+      <van-tabbar-item
+        icon="home-o"
+        :to="item.url"
+        v-for="item in tabbar"
+        :key="item.url"
+      >{{item.name}}</van-tabbar-item>
+    </van-tabbar>
   </div>
 </template>
 

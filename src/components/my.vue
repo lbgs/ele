@@ -46,10 +46,12 @@
         </div>
       </div>
     </div>
+    <tabBar></tabBar>
   </div>
 </template>
 
 <script>
+import tabBar from './tabBar.vue'
 export default {
   data() {
     return {
@@ -92,6 +94,9 @@ export default {
         }
       ]
     };
+  },
+  components:{
+    tabBar
   },
   created(){
       let item = '18823547785';

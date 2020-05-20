@@ -11,7 +11,7 @@
         <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
       </van-sidebar>
     </van-sticky>
-    <div class="food-control">
+    <div class="food-control" :style="`margin-top: -${foodY}px;height:${foodH}px`" ref="food">
       <div class="category" v-for="item in list" :key="item.id">
         <van-sticky :offset-top="44">
           <p class="food-name">{{item.name}}</p>
@@ -219,11 +219,22 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      offsetTopArr: [],
+      foodY: 0,
+      foodH: 0
     };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
+    this.offsetTopArr = [];
+    let navContents = document.querySelectorAll(".category");
+    navContents.forEach(item => {
+      this.offsetTopArr.push(item.offsetTop);
+    });
+
+    console.log(this.$refs.food.clientHeight);
+    this.foodH = this.$refs.food.clientHeight;
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
@@ -231,20 +242,15 @@ export default {
   },
   methods: {
     scrollTo: function(e) {
-      document.documentElement.scrollTop = this.offsetTopArr[e] + 1;
+      console.log(this.offsetTopArr);
+      document.documentElement.scrollTop = this.offsetTopArr[e];
     },
     onScroll() {
       // 滚动监听器
-      let navContents = document.querySelectorAll(".category");
-      let offsetTopArr = [];
-      navContents.forEach(item => {
-        offsetTopArr.push(item.offsetTop);
-      });
-      this.offsetTopArr = offsetTopArr;
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       let navIndex = 0;
-      offsetTopArr.forEach((item, index) => {
+      this.offsetTopArr.forEach((item, index) => {
         if (scrollTop >= item) {
           this.activeKey = index;
         }
@@ -253,8 +259,25 @@ export default {
   }
 };
 </script>
-<style lang="scss" scope>
-.my-swipe{
+<style lang="scss" >
+.my-swipe {
   margin: 10px auto;
+}
+.nav-left {
+  position: absolute;
+}
+.food-control {
+  padding-left: 85px;
+  overflow: hidden;
+  .food-name {
+    margin: 0;
+    padding: 5px;
+    left: 85px;
+    font-size: 14px;
+    background-color: #fff;
+  }
+  .van-sticky--fixed {
+    left: 85px !important;
+  }
 }
 </style>

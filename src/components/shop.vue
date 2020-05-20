@@ -103,13 +103,13 @@ export default {
     },
     touchMove: function(el) {
       console.log(el.touches[0].screenY - this.startY);
-      let Y = el.touches[0].screenY - this.startY;
-      if (Y > 0) {
-        el.preventDefault();
-        this.moveY = Y + 58;
-      } else {
-        return true;
-      }
+      // let Y = el.touches[0].screenY - this.startY;
+      // if (Y > 0) {
+      //   el.preventDefault();
+      //   this.moveY = Y + 58;
+      // } else {
+      //   return true;
+      // }
     },
     touchEnd: function(el) {
       let y = 58;
@@ -118,7 +118,7 @@ export default {
   }
 };
 </script>
- <style lang="scss" scope>
+ <style lang="scss" scoped>
 .move {
   position: relative;
 }
@@ -132,7 +132,6 @@ export default {
   top: 100px;
 }
 .shop {
-  // background-color: cadetblue;
   position: relative;
   .bg {
     position: relative;
@@ -261,22 +260,7 @@ export default {
         }
       }
     }
-  }
-  .nav-left {
-    position: absolute;
-  }
-  .food-control {
-    padding-left: 85px;
-    .food-name {
-      margin: 0;
-      padding: 5px;
-      font-size: 14px;
-      background-color: #fff;
-    }
-    .van-sticky--fixed {
-      left: 85px !important;
-    }
-  }
+  }  
 }
 .van-card {
   margin: 0 !important;

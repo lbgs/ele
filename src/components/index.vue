@@ -236,7 +236,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 h1 {
   padding: 0;
   margin: 0;
@@ -254,18 +254,6 @@ h1 {
       position: relative;
       font-size: 0.9rem;
     }
-  }
-}
-.my-swipe {
-  width: 93vw;
-  margin: 0 auto;
-  border-radius: 10px;
-  .van-swipe-item {
-    color: #fff;
-    font-size: 20px;
-    line-height: 5.46rem;
-    text-align: center;
-    background-color: #39a9ed;
   }
 }
 .card {

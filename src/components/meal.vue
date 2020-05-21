@@ -21,10 +21,13 @@
           v-for="items in item.data"
           :key="items.id"
           price="2.00"
+          origin-price="4.00"
           desc="描述信息"
           :title="items.name"
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
-        />
+        >
+          <span class="plus" slot="num">+</span>
+        </van-card>
       </div>
     </div>
   </div>
@@ -274,6 +277,24 @@ export default {
   }
   .van-sticky--fixed {
     left: 85px !important;
+  }
+  .plus{
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: cornflowerblue;
+    border-radius: 50%;
+    position: relative;
+    &::before{
+      content: "+";
+      position: absolute;
+      top: -2px;
+      left: 50%;
+      transform: translate(-50%);
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
   }
 }
 </style>

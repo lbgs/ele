@@ -18,13 +18,15 @@
       </van-col>
     </van-row>
     <!-- 搜索框 -->
-    <van-search
-      v-model="searchVal"
-      @input="getInput"
-      placeholder="请输入搜索关键词"
-      shape="round"
-      input-align="center"
-    />
+    <van-sticky ref="search">
+      <van-search
+        v-model="searchVal"
+        @input="getInput"
+        placeholder="请输入搜索关键词"
+        shape="round"
+        input-align="center"
+      />
+    </van-sticky>
     <!-- 轮播图 -->
     <van-swipe class="my-swipe" :autoplay="0" indicator-color="white">
       <van-swipe-item>1</van-swipe-item>
@@ -42,7 +44,7 @@
       <van-grid-item v-for="item in gridTow" :key="item.id" icon="photo-o" :text="item.name" />
     </van-grid>
     <!-- 列表 -->
-    <van-tabs v-model="active" sticky>
+    <van-tabs v-model="active" sticky :offset-top="searchHight">
       <van-tab title="推荐">
         <div v-for="item in topList" :key="item.id">
           <div class="card" @click="getShop(item.id)">
@@ -95,6 +97,7 @@ export default {
     return {
       active: 0,
       searchVal: "",
+      searchHight: 0,
       gridNoe: [
         {
           id: 0,
@@ -227,6 +230,10 @@ export default {
       console.log(id);
       this.$router.push({ path: "shop", query: { id } });
     }
+  },
+  mounted(){
+    console.log(this.$refs.search.height)
+    this.searchHight = this.$refs.search.clientHeight
   },
   watch: {
     searchVal: (val, old) => {

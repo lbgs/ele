@@ -11,7 +11,7 @@
         <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
       </van-sidebar>
     </van-sticky>
-    <div class="food-control" :style="`margin-top: -${foodY}px;height:${foodH}px`" ref="food">
+    <div class="food-control" :style="`margin-top: -${foodY}px;`" ref="food">
       <div class="category" v-for="item in list" :key="item.id">
         <van-sticky :offset-top="44">
           <p class="food-name">{{item.name}}</p>
@@ -222,7 +222,6 @@ export default {
       ],
       offsetTopArr: [],
       foodY: 0,
-      foodH: 0
     };
   },
   mounted() {
@@ -232,9 +231,6 @@ export default {
     navContents.forEach(item => {
       this.offsetTopArr.push(item.offsetTop);
     });
-
-    console.log(this.$refs.food.clientHeight);
-    this.foodH = this.$refs.food.clientHeight;
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错

@@ -9,7 +9,7 @@
     <div class="logo">
       <img
         src="https://p0.meituan.net/xianfu/a5c31ae0e09bd021c65eab5fce254110325859.jpg@130w_130h_1e_1c"
-        alt
+        :style="`transform: scale(${scrollTop <= 50 ? 1-scrollTop*2/100: 0});`"
       />
     </div>
     <div class="info-control">
@@ -28,8 +28,8 @@
           <div class="btn">购买</div>
         </div>
       </div>
-      <div :style="`height:${moveY}px`">
-        <div ref="show">
+      <div class="tagInfo" :style="`height:${moveY}px`">
+        <div class="gradient" ref="show" :style="`opacity: ${1-showY/50};`">
           <div class="tag-control">
             <div class="tags">
               <van-tag plain type="danger">标签</van-tag>
@@ -42,7 +42,7 @@
           <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
         </div>
         <!-- 隐藏 -->
-        <div class="show" :style="`opacity: 0;`">
+        <div class="show gradient" :style="`opacity: ${showY/100-0.5};`">
           <div class="title">优惠</div>
           <ul class="content">
             <li v-for="item in 8" :key="item">
@@ -87,33 +87,48 @@ export default {
       offsetTopArr: null,
       active: 0,
       startY: 0,
-      moveY: 58
+      moveY: 0,
+      scrollTop: 0,
+      showY: 0
     };
   },
   components: {
     meal
   },
-  created(){
-    console.log(this.$refs)
+  mounted() {
+    window.addEventListener("scroll", this.onScroll);
+    this.moveY = this.$refs.show.clientHeight;
+  },
+  destroy() {
+    // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
+    window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
     touchStart: function(el) {
-      // console.log(el.touches[0].screenY);
+      this.scrollStatus = this.scrollTop > 0 ? true : false;
       this.startY = el.touches[0].screenY;
     },
     touchMove: function(el) {
-      console.log(el.touches[0].screenY - this.startY);
-      // let Y = el.touches[0].screenY - this.startY;
-      // if (Y > 0) {
-      //   el.preventDefault();
-      //   this.moveY = Y + 58;
-      // } else {
-      //   return true;
-      // }
+      console.log(this.scrollStatus);
+      if (this.scrollStatus) {
+        return true;
+      }
+      this.showY = el.touches[0].screenY - this.startY;
+      if (this.showY > 0) {
+        el.preventDefault();
+        this.moveY = this.showY + this.$refs.show.clientHeight;
+      } else {
+        return true;
+      }
     },
     touchEnd: function(el) {
       let y = 58;
-      this.moveY = this.moveY - y > 30 ? 500 : y;
+      this.moveY = this.moveY - y > 100 ? 500 : y;
+    },
+    onScroll() {
+      // 滚动监听器
+      this.scrollTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
     }
   }
 };
@@ -156,6 +171,7 @@ export default {
     background-color: #fff;
     text-align: center;
     padding: 20px;
+    position: relative;
     .title {
       font-size: 1.2rem;
       font-weight: bold;
@@ -219,48 +235,55 @@ export default {
       font-size: 10px;
       color: #666;
     }
-    .show {
-      text-align: left;
-      .title {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin: 10px 0;
+    .tagInfo {
+      .gradient {
+        position: absolute;
+        width: 89%;
       }
-      .content {
-        li {
+      .show {
+        text-align: left;
+        .title {
+          font-size: 1.1rem;
+          font-weight: bold;
           margin: 10px 0;
-          .txt {
-            display: inline-block;
-            margin-left: 10px;
+        }
+        .content {
+          li {
+            margin: 10px 0;
+            .txt {
+              display: inline-block;
+              margin-left: 10px;
+            }
+            span {
+              padding: 2px 3px;
+            }
           }
-          span {
-            padding: 2px 3px;
+        }
+        .top-btn {
+          position: relative;
+          margin-top: 20px;
+          width: 100%;
+          &::after,
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 30px;
+            height: 5px;
+            background-color: #999;
+            border-radius: 10px;
           }
-        }
-      }
-      .top-btn {
-        position: relative;
-        margin-top: 20px;
-        &::after,
-        &::before {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 50%;
-          width: 30px;
-          height: 5px;
-          background-color: #999;
-          border-radius: 10px;
-        }
-        &::after {
-          transform: translate(-100%) rotateZ(-20deg);
-        }
-        &::before {
-          transform: translateX(-20%) rotateZ(20deg);
+          &::after {
+            transform: translate(-100%) rotateZ(-20deg);
+          }
+          &::before {
+            transform: translateX(-20%) rotateZ(20deg);
+          }
         }
       }
     }
-  }  
+  }
 }
 .van-card {
   margin: 0 !important;

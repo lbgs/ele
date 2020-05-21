@@ -14,7 +14,7 @@ import router from './router.js'
 import {
   Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem,
   Grid, GridItem, Tab, Tabs, Divider, Button, Sidebar, SidebarItem, Card, TreeSelect,
-  Sticky,Tag 
+  Sticky, Tag
 } from 'vant';
 import 'vant/lib/index.css'
 Vue.use(Tabbar);
@@ -45,7 +45,24 @@ Vue.filter('phone', item => item.replace(/(\d{3})\d{4}(\d{4})/, '$1****$2'));
 
 Vue.config.productionTip = false
 
+// vuex状态管理
+import Vuex from 'vuex';
+Vue.use(Vuex);
+const store = new Vuex.Store({
+  state: {
+    scrollTop: 0
+  },
+  getters: {
+    onScroll(state) {
+      // 滚动监听器
+      state.scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+      // state.scrollTop = state.scrollTop;
+    }
+  }
+})
+
 new Vue({
   render: h => h(App),
   router,
+  store
 }).$mount('#app')

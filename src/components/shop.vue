@@ -45,7 +45,7 @@
         <div class="show gradient" :style="`opacity: ${showY/100-0.5};`">
           <div class="title">优惠</div>
           <ul class="content">
-            <li v-for="item in 8" :key="item">
+            <li v-for="item in 5" :key="item">
               <van-tag plain type="danger">标签</van-tag>
               <p class="txt">配送费立减2.4元</p>
             </li>
@@ -59,12 +59,12 @@
           </ul>
           <div class="title">公告</div>
           <div class="content">传承中华美味，专业提供质简餐！</div>
-          <div class="top-btn"></div>
+          <div class="top-btn" @click="btnUp"></div>
         </div>
       </div>
     </div>
     <!-- 点餐、评价、商家 -->
-    <div @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd" class="move">
+    <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" class="move">
       <van-tabs v-model="active" swipeable sticky color="blue">
         <van-tab title="点餐">
           <meal></meal>
@@ -108,8 +108,20 @@ export default {
       this.scrollStatus = this.scrollTop > 0 ? true : false;
       this.startY = el.touches[0].screenY;
     },
-    touchMove: function(el) {
-      console.log(this.scrollStatus);
+    btnUp: function(el) {
+      console.log("收起来");
+      let y = this.$refs.show.clientHeight;
+      document.body.style.overflow = "auto";
+      let time = setInterval(() => {
+        if (this.moveY < y) {
+          clearInterval(time);
+          this.moveY = y;
+        }
+        this.moveY -= 20;
+        this.showY -= 20;
+      }, 1);
+    },
+    touchMoveDown: function(el) {
       if (this.scrollStatus) {
         return true;
       }
@@ -122,8 +134,22 @@ export default {
       }
     },
     touchEnd: function(el) {
-      let y = 58;
-      this.moveY = this.moveY - y > 100 ? 500 : y;
+      let y = this.$refs.show.clientHeight;
+      let seep = this.moveY - y > 100 ? +20 : -10;
+      let time = setInterval(() => {
+        if (this.moveY <= y || this.moveY > 500) {
+          clearInterval(time);
+          if (this.moveY <= y) {
+            this.moveY = y + 10;
+            this.showY = 0;
+          }
+          if (this.moveY > 500) {
+            document.body.style.overflow = "hidden";
+          }
+        }
+        this.moveY += seep;
+        console.log(this.moveY);
+      }, 1);
     },
     onScroll() {
       // 滚动监听器
@@ -136,6 +162,7 @@ export default {
  <style lang="scss" scoped>
 .move {
   position: relative;
+  padding-top: 20px;
 }
 .fli {
   width: 100px;
@@ -170,7 +197,7 @@ export default {
   .info-control {
     background-color: #fff;
     text-align: center;
-    padding: 20px;
+    padding: 20px 20px 0;
     position: relative;
     .title {
       font-size: 1.2rem;
@@ -261,7 +288,7 @@ export default {
         }
         .top-btn {
           position: relative;
-          margin-top: 20px;
+          margin-top: 50px;
           width: 100%;
           &::after,
           &::before {

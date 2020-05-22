@@ -43,7 +43,7 @@ export default {
       list: [
         {
           id: 0,
-          img: "./../../assets/images/logo.jpg",
+          img: "https://p0.meituan.net/xianfu/a5c31ae0e09bd021c65eab5fce254110325859.jpg@130w_130h_1e_1c",
           title: "加州汉堡·炸鸡(东圃店)",
           delivery: "已送达",
           time: "2小时55分钟前",
@@ -53,7 +53,7 @@ export default {
         },
         {
           id: 1,
-          img: "./../../assets/images/logo.jpg",
+          img: "https://p0.meituan.net/xianfu/a5c31ae0e09bd021c65eab5fce254110325859.jpg@130w_130h_1e_1c",
           title: "加州汉堡·炸鸡(东圃店)",
           delivery: "已送达",
           time: "2小时55分钟前",

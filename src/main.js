@@ -14,7 +14,7 @@ import router from './router.js'
 import {
   Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem,
   Grid, GridItem, Tab, Tabs, Divider, Button, Sidebar, SidebarItem, Card, TreeSelect,
-  Sticky, Tag
+  Sticky, Tag, Rate, Checkbox, CheckboxGroup
 } from 'vant';
 import 'vant/lib/index.css'
 Vue.use(Tabbar);
@@ -37,6 +37,9 @@ Vue.use(Card);
 Vue.use(TreeSelect);
 Vue.use(Sticky);
 Vue.use(Tag);
+Vue.use(Rate);
+Vue.use(CheckboxGroup);
+Vue.use(Checkbox);
 
 // 过滤器
 Vue.filter('distance', val => val >= 1000 ? `${val / 1000}km` : `${val}km`);

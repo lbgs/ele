@@ -64,13 +64,13 @@
       </div>
     </div>
     <!-- 点餐、评价、商家 -->
-    <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" class="move">
+    <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" ref="move">
       <van-tabs v-model="active" swipeable sticky color="blue">
         <van-tab title="点餐">
           <meal></meal>
         </van-tab>
-        <van-tab title="评价" style="height:100vh">
-          <div class="review">点评</div>
+        <van-tab title="评价">
+          <appraise></appraise>
         </van-tab>
         <van-tab title="商家" style="height:100vh">
           <div class="merchant">商家</div>
@@ -81,11 +81,12 @@
 </template>
 <script>
 import meal from "./meal.vue";
+import appraise from './appraise.vue'
 export default {
   data() {
     return {
       offsetTopArr: null,
-      active: 0,
+      active: 1,
       startY: 0,
       moveY: 0,
       scrollTop: 0,
@@ -93,7 +94,8 @@ export default {
     };
   },
   components: {
-    meal
+    meal,
+    appraise
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
@@ -109,7 +111,6 @@ export default {
       this.startY = el.touches[0].screenY;
     },
     btnUp: function(el) {
-      console.log("收起来");
       let y = this.$refs.show.clientHeight;
       document.body.style.overflow = "auto";
       let time = setInterval(() => {
@@ -148,7 +149,6 @@ export default {
           }
         }
         this.moveY += seep;
-        console.log(this.moveY);
       }, 1);
     },
     onScroll() {
@@ -160,9 +160,8 @@ export default {
 };
 </script>
  <style lang="scss" scoped>
-.move {
-  position: relative;
-  padding-top: 20px;
+.van-tabs {
+  position: static;
 }
 .fli {
   width: 100px;
@@ -263,6 +262,7 @@ export default {
       color: #666;
     }
     .tagInfo {
+      padding-bottom: 20px;
       .gradient {
         position: absolute;
         width: 89%;
@@ -311,12 +311,5 @@ export default {
       }
     }
   }
-}
-.van-card {
-  margin: 0 !important;
-  background-color: #fff !important;
-}
-.van-sidebar-item--select {
-  border-color: white !important;
 }
 </style>

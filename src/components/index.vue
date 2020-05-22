@@ -191,7 +191,7 @@ export default {
         {
           id: 0,
           title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: "../assets/images/logo.jpg",
+          imgUrl: require('../assets/images/logo.jpg'),
           evaluate: 4.8,
           monthly: 448,
           standard: 15,
@@ -203,7 +203,7 @@ export default {
         {
           id: 1,
           title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: "/img/logo.jpg",
+          imgUrl: require('../assets/images/logo.jpg'),
           evaluate: 4.8,
           monthly: 448,
           standard: 15,

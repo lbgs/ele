@@ -11,8 +11,14 @@
         <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
       </van-sidebar>
     </van-sticky>
-    <div class="food-control" :style="`margin-top: -${foodY}px;`" ref="food">
-      <div class="category" v-for="item in list" :key="item.id">
+    <div
+      class="food-control"
+      :style="`margin-top: -${foodY}px;`"
+      ref="food"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+    >
+      <div class="category" v-for="item in list" :key="item.id" ref="category">
         <van-sticky :offset-top="44">
           <p class="food-name">{{item.name}}</p>
         </van-sticky>
@@ -224,16 +230,12 @@ export default {
         }
       ],
       offsetTopArr: [],
-      foodY: 0,
+      foodY: 0
     };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
-    this.offsetTopArr = [];
-    let navContents = document.querySelectorAll(".category");
-    navContents.forEach(item => {
-      this.offsetTopArr.push(item.offsetTop);
-    });
+    this.offsetTopArr = this.$refs.category.map(item => item.offsetTop);
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
@@ -241,19 +243,29 @@ export default {
   },
   methods: {
     scrollTo: function(e) {
-      console.log(this.offsetTopArr);
-      document.documentElement.scrollTop = this.offsetTopArr[e];
+      this.foodY = this.offsetTopArr[e] - this.offsetTopArr[0];
     },
-    onScroll() {
+    onScroll(el) {
+      console.log(this.$refs.food.offsetTop);
       // 滚动监听器
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop;
       let navIndex = 0;
       this.offsetTopArr.forEach((item, index) => {
-        if (scrollTop >= item) {
+        console.log((item + this.$refs.food.offsetTop) + "-------" + scrollTop);
+        if (scrollTop >= item + 415) {
           this.activeKey = index;
         }
       });
+    },
+    touchStart: function(el) {
+      console.log(el.touches[0].screenY);
+      this.startY = el.touches[0].screenY;
+    },
+    touchMove: function(el) {
+      // console.log(el.touches[0].screenY - this.startY)
+      this.foodY = el.touches[0].screenY - this.startY;
+      console.log(this.foodY);
     }
   }
 };
@@ -267,7 +279,8 @@ export default {
 }
 .food-control {
   padding-left: 85px;
-  overflow: hidden;
+  position: relative;
+  z-index: -10;
   .food-name {
     margin: 0;
     padding: 5px;
@@ -278,14 +291,14 @@ export default {
   .van-sticky--fixed {
     left: 85px !important;
   }
-  .plus{
+  .plus {
     display: inline-block;
     width: 20px;
     height: 20px;
     background-color: cornflowerblue;
     border-radius: 50%;
     position: relative;
-    &::before{
+    &::before {
       content: "+";
       position: absolute;
       top: -2px;
@@ -296,5 +309,12 @@ export default {
       font-weight: bold;
     }
   }
+}
+.van-card {
+  margin: 0 !important;
+  background-color: #fff !important;
+}
+.van-sidebar-item--select {
+  border-color: white !important;
 }
 </style>

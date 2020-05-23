@@ -67,10 +67,10 @@
     <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" ref="move">
       <van-tabs v-model="active" swipeable sticky color="blue">
         <van-tab title="点餐">
-          <meal></meal>
+          <meal />
         </van-tab>
         <van-tab title="评价">
-          <appraise></appraise>
+          <appraise/>
         </van-tab>
         <van-tab title="商家" style="height:100vh">
           <div class="merchant">商家</div>
@@ -81,16 +81,16 @@
 </template>
 <script>
 import meal from "./meal.vue";
-import appraise from './appraise.vue'
+import appraise from "./appraise.vue";
 export default {
   data() {
     return {
       offsetTopArr: null,
-      active: 1,
+      active: 0,
       startY: 0,
       moveY: 0,
       scrollTop: 0,
-      showY: 0
+      showY: 0,
     };
   },
   components: {

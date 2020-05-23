@@ -230,12 +230,14 @@ export default {
         }
       ],
       offsetTopArr: [],
-      foodY: 0
+      foodY: 0,
+      status: false
     };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
     this.offsetTopArr = this.$refs.category.map(item => item.offsetTop);
+    this.foodTop = this.$refs.food.offsetTop;
   },
   destroy() {
     // 必须移除监听器，不然当该vue组件被销毁了，监听器还在就会出错
@@ -243,16 +245,25 @@ export default {
   },
   methods: {
     scrollTo: function(e) {
-      this.foodY = this.offsetTopArr[e] - this.offsetTopArr[0];
+      let setTop = this.offsetTopArr[e] - this.offsetTopArr[0];
+      if (this.status) {
+        document.documentElement.scrollTop = this.foodTop + setTop;
+      } else {
+        this.foodY = setTop;
+      }
     },
     onScroll(el) {
-      console.log(this.$refs.food.offsetTop);
       // 滚动监听器
-      const scrollTop =
-        document.documentElement.scrollTop || document.body.scrollTop;
+      let scrollTop = document.documentElement.scrollTop;
+      if (scrollTop >= this.foodTop) {
+        document.documentElement.scrollTop = this.foodY + scrollTop;
+        this.foodY = 0;
+        this.status = true;
+      }else{
+        this.status = false;
+      }
       let navIndex = 0;
       this.offsetTopArr.forEach((item, index) => {
-        console.log((item + this.$refs.food.offsetTop) + "-------" + scrollTop);
         if (scrollTop >= item + 415) {
           this.activeKey = index;
         }

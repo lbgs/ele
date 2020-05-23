@@ -20,8 +20,11 @@
     <!-- 搜索框 -->
     <van-sticky ref="search">
       <van-search
+        class="search"
         v-model="searchVal"
         @input="getInput"
+        @focus="getFocus"
+        @blur="getBlur"
         placeholder="请输入搜索关键词"
         shape="round"
         input-align="center"
@@ -44,9 +47,9 @@
       <van-grid-item v-for="item in gridTow" :key="item.id" icon="photo-o" :text="item.name" />
     </van-grid>
     <!-- 列表 -->
-    <van-tabs v-model="active" sticky :offset-top="searchHight">
-      <van-tab title="推荐">
-        <div v-for="item in topList" :key="item.id">
+    <van-tabs v-model="active" sticky :offset-top="searchHight" animated swipeable>
+      <van-tab :title="items.name" v-for="items in data" :key="items.id">
+        <div v-for="item in items.list" :key="item.id">
           <div class="card" @click="getShop(item.id)">
             <div class="img">
               <img :src="item.imgUrl" />
@@ -82,9 +85,6 @@
           </div>
         </div>
       </van-tab>
-      <van-tab title="发现好菜">发现好菜</van-tab>
-      <van-tab title="果蔬商超">果蔬商超</van-tab>
-      <van-tab title="到点自取">到点自取</van-tab>
     </van-tabs>
     <tabBar></tabBar>
   </div>
@@ -187,30 +187,125 @@ export default {
           name: "全部分类"
         }
       ],
-      topList: [
+      data: [
         {
           id: 0,
-          title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: require('../assets/images/logo.jpg'),
-          evaluate: 4.8,
-          monthly: 448,
-          standard: 15,
-          delivery: { free: true, price: 3.5 },
-          time: 30,
-          distance: 2400,
-          tags: ["20减19", "120减51", "50减22"]
+          name: "推进",
+          list: [
+            {
+              id: 0,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: true, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            },
+            {
+              id: 1,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: false, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            }
+          ]
         },
         {
           id: 1,
-          title: "太二酸菜鱼(奥体高德汇店)",
-          imgUrl: require('../assets/images/logo.jpg'),
-          evaluate: 4.8,
-          monthly: 448,
-          standard: 15,
-          delivery: { free: false, price: 3.5 },
-          time: 30,
-          distance: 2400,
-          tags: ["20减19", "120减51", "50减22"]
+          name: "发现好菜",
+          list: [
+            {
+              id: 0,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: true, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            },
+            {
+              id: 1,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: false, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            }
+          ]
+        },
+        {
+          id: 2,
+          name: "果蔬商超",
+          list: [
+            {
+              id: 0,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: true, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            },
+            {
+              id: 1,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: false, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            },
+            {
+              id: 2,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: false, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            },
+            {
+              id: 3,
+              title: "太二酸菜鱼(奥体高德汇店)",
+              imgUrl: require("../assets/images/logo.jpg"),
+              evaluate: 4.8,
+              monthly: 448,
+              standard: 15,
+              delivery: { free: false, price: 3.5 },
+              time: 30,
+              distance: 2400,
+              tags: ["20减19", "120减51", "50减22"]
+            }
+          ]
+        },
+        {
+          id: 3,
+          name: "到点自取",
+          list: []
         }
       ]
     };
@@ -221,6 +316,14 @@ export default {
   created: function() {},
   methods: {
     //搜索
+    getFocus: function(el) {
+      let i = document.querySelector("input[type='search']");
+      i.style.textAlign = "left";
+    },
+    getBlur: function() {
+      let i = document.querySelector("input[type='search']");
+      i.style.textAlign = "center";
+    },
     getInput: function(el) {
       console.log(el);
     },
@@ -231,9 +334,9 @@ export default {
       this.$router.push({ path: "shop", query: { id } });
     }
   },
-  mounted(){
-    console.log(this.$refs.search.height)
-    this.searchHight = this.$refs.search.clientHeight
+  mounted() {
+    console.log(this.$refs.search.height);
+    this.searchHight = this.$refs.search.clientHeight;
   },
   watch: {
     searchVal: (val, old) => {

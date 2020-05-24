@@ -28,11 +28,20 @@
           :key="items.id"
           price="2.00"
           origin-price="4.00"
-          desc="描述信息"
-          :title="items.name"
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
         >
-          <span class="plus" slot="num">+</span>
+          <div class="title spill" slot="title">{{items.name}}</div>
+          <div class="desc font-size spill" slot="desc">{{items.desc}}</div>
+          <div class="tags font-size" slot="tags">
+            <span>月售</span>
+            &nbsp;&nbsp;
+            <span>好评</span>
+          </div>
+          <div class="price-top" slot="price-top">
+            <van-tag class="font-size" plain type="danger">4.4折</van-tag>
+          </div>
+          <div class="font-size" slot="origin-price">￥2.00</div>
+          <div class="plus" slot="num">+</div>
         </van-card>
       </div>
     </div>
@@ -259,7 +268,7 @@ export default {
         document.documentElement.scrollTop = this.foodY + scrollTop;
         this.foodY = 0;
         this.status = true;
-      }else{
+      } else {
         this.status = false;
       }
       let navIndex = 0;
@@ -288,6 +297,15 @@ export default {
 .nav-left {
   position: absolute;
 }
+.font-size {
+  font-size: 0.5rem;
+  margin: 3px 0;
+}
+.spill {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
 .food-control {
   padding-left: 85px;
   position: relative;
@@ -301,6 +319,12 @@ export default {
   }
   .van-sticky--fixed {
     left: 85px !important;
+  }
+  .van-tag {
+    padding: 0 0.2rem;
+  }
+  .title {
+    font-weight: bold;
   }
   .plus {
     display: inline-block;

@@ -10,23 +10,34 @@
         placeholder="请输入搜索关键词"
         shape="round"
         show-action
-        action-text="搜索"
         input-align="left"
         :autofocus="true"
       >
         <div slot="left" class="back" @click="getBack">
           <van-icon name="arrow-left" size="20" />
         </div>
+        <template #action>
+          <div @click="onSearch">搜索</div>
+        </template>
       </van-search>
     </van-sticky>
-    <h1>搜索页面</h1>
+    <div class="found">
+      <h4>搜索发现</h4>
+      <span
+        v-for="(item,index) in foundList"
+        :key="index"
+        @click="onSearch"
+        :data-text="item"
+      >{{item}}</span>
+    </div>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      searchVal: ""
+      searchVal: "",
+      foundList: ["华莱士", "酸菜鱼", "隆江猪脚饭", "木桶饭"]
     };
   },
   methods: {
@@ -46,17 +57,33 @@ export default {
     },
     //返回
     getBack: function() {
-      this.$router.go(-1)
+      this.$router.go(-1);
+    },
+    onSearch: function(el) {
+      this.searchVal = el.target.dataset.text || this.searchVal;
+      console.log(this.searchVal);
     }
   }
 };
 </script>
 <style lang="scss" scoped>
-.search {
-}
 .back {
   margin-right: 10px;
   display: flex;
   align-items: center;
+}
+.found {
+  padding: 10px 10px 0;
+  h4 {
+    margin: 5px;
+  }
+  span {
+    display: inline-block;
+    background-color: #f7f7f7;
+    padding: 10px 15px;
+    margin: 5px;
+    font-size: 0.8rem;
+    border-radius: 5px;
+  }
 }
 </style>

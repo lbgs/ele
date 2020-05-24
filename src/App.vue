@@ -40,8 +40,14 @@ export default {
     color: #fff;
     font-size: 20px;
     line-height: 5.46rem;
+    height: 5.46rem;
+    overflow: hidden;
     text-align: center;
     background-color: #39a9ed;
+    img{
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 </style>

@@ -31,23 +31,22 @@
       />
     </van-sticky>
     <!-- 轮播图 -->
-    <van-swipe class="my-swipe" :autoplay="0" indicator-color="white">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
+    <van-swipe class="my-swipe" :autoplay="0" indicator-color="white" height="100px">
+      <van-swipe-item v-for="(item,index) in images" :key="index">
+        <img v-lazy="item" />
+      </van-swipe-item>
     </van-swipe>
     <!-- 宫格菜单 -->
     <!-- 一级菜单 -->
-    <van-grid :column-num="5" :border="false">
-      <van-grid-item v-for="item in gridNoe" :key="item.id" icon="photo-o" :text="item.name" />
+    <van-grid :column-num="5" :border="false" :icon-size="45">
+      <van-grid-item v-for="item in gridNoe" :key="item.id" :icon="item.icon" :text="item.name" />
     </van-grid>
     <!-- 二级菜单 -->
     <van-grid :column-num="5" :border="false">
-      <van-grid-item v-for="item in gridTow" :key="item.id" icon="photo-o" :text="item.name" />
+      <van-grid-item v-for="item in gridTow" :key="item.id" :icon="item.icon" :text="item.name" />
     </van-grid>
     <!-- 列表 -->
-    <van-tabs v-model="active" sticky :offset-top="searchHight" animated swipeable>
+    <van-tabs v-model="active" sticky :offset-top="searchHight" animated swipeable color="blue">
       <van-tab :title="items.name" v-for="items in data" :key="items.id">
         <div v-for="item in items.list" :key="item.id">
           <div class="card" @click="getShop(item.id)">
@@ -101,88 +100,88 @@ export default {
       gridNoe: [
         {
           id: 0,
-          icon: "",
+          icon: require("../assets/images/icon (1).jpg"),
           name: "美食"
         },
         {
           id: 1,
-          icon: "",
+          icon: require("../assets/images/icon (2).jpg"),
           name: "商超便利"
         },
         {
           id: 2,
-          icon: "",
+          icon: require("../assets/images/icon (3).jpg"),
           name: "水果"
         },
         {
           id: 3,
-          icon: "",
+          icon: require("../assets/images/icon (4).jpg"),
           name: "跑腿服务"
         },
         {
           id: 4,
-          icon: "",
+          icon: require("../assets/images/icon (5).jpg"),
           name: "甜品饮品"
         }
       ],
       gridTow: [
         {
           id: 0,
-          icon: "",
+          icon: require("../assets/images/icon (6).jpg"),
           url: "",
           name: "下午茶"
         },
         {
           id: 1,
-          icon: "",
+          icon: require("../assets/images/icon (7).jpg"),
           url: "",
           name: "汉堡披萨"
         },
         {
           id: 2,
-          icon: "",
+          icon: require("../assets/images/icon (8).jpg"),
           url: "",
           name: "新店尝鲜"
         },
         {
           id: 3,
-          icon: "",
+          icon: require("../assets/images/icon (9).jpg"),
           url: "",
           name: "买菜"
         },
         {
           id: 4,
-          icon: "",
+          icon: require("../assets/images/icon (10).jpg"),
           url: "",
           name: "送药上门"
         },
         {
           id: 5,
-          icon: "",
+          icon: require("../assets/images/icon (11).jpg"),
           url: "",
           name: "星选好店"
         },
         {
           id: 6,
-          icon: "",
+          icon: require("../assets/images/icon (12).jpg"),
           url: "",
           name: "大牌惠吃"
         },
         {
           id: 7,
-          icon: "",
+          icon: require("../assets/images/icon (13).jpg"),
           url: "",
           name: "签到赢钱"
         },
         {
           id: 8,
-          icon: "",
+          icon: require("../assets/images/icon (14).jpg"),
           url: "",
           name: "炸鸡烤串"
         },
         {
           id: 9,
-          icon: "",
+          icon: require("../assets/images/icon (15).jpg"),
           url: "",
           name: "全部分类"
         }
@@ -307,7 +306,8 @@ export default {
           name: "到点自取",
           list: []
         }
-      ]
+      ],
+      images: [require("../assets/images/swipe-1.gif"), 2, 3, 4]
     };
   },
   components: {
@@ -319,7 +319,7 @@ export default {
     getFocus: function(el) {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "left";
-      this.$router.push('search')
+      this.$router.push("search");
     },
     //搜索框失去焦点
     getBlur: function() {

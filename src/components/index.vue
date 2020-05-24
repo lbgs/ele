@@ -315,15 +315,18 @@ export default {
   },
   created: function() {},
   methods: {
-    //搜索
+    //搜索获得焦点
     getFocus: function(el) {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "left";
+      this.$router.push('search')
     },
+    //搜索框失去焦点
     getBlur: function() {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "center";
     },
+    //搜索框内容改变
     getInput: function(el) {
       console.log(el);
     },

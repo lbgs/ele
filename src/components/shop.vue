@@ -65,14 +65,14 @@
     </div>
     <!-- 点餐、评价、商家 -->
     <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" ref="move">
-      <van-tabs v-model="active" swipeable sticky color="blue">
-        <van-tab title="点餐">
+      <van-tabs  v-model="active" swipeable sticky color="blue">
+        <van-tab class="min-height" title="点餐">
           <meal />
         </van-tab>
-        <van-tab title="评价">
+        <van-tab class="min-height" title="评价">
           <appraise />
         </van-tab>
-        <van-tab title="商家">
+        <van-tab class="min-height" title="商家">
           <storeInfo />
         </van-tab>
       </van-tabs>
@@ -165,6 +165,9 @@ export default {
 .van-tabs {
   position: static;
 }
+.min-height{
+  min-height: 93vh;
+}
 .fli {
   width: 100px;
   height: 100px;
@@ -205,7 +208,7 @@ export default {
       font-weight: bold;
     }
     .content {
-      font-size: 0.1rem;
+      font-size: 0.5rem;
       margin: 5px 0;
       color: #666;
       span {
@@ -215,7 +218,7 @@ export default {
           content: "";
           position: absolute;
           left: 0;
-          top: 5px;
+          top: 0;
           width: 1px;
           height: 10px;
           background-color: #ccc;
@@ -228,20 +231,23 @@ export default {
       margin: 5px 0;
       .piece {
         display: flex;
+        width: 49%;
         .text,
         .btn {
           background-color: coral;
-          padding: 6px 3.5vw;
-          font-size: 0.1rem;
+          padding: 1vw 3.5vw;
+          font-size: 0.5rem;
           color: white;
         }
         .text {
+          flex: 2;
           border-radius: 0 5px 5px 0;
           span {
             font-size: 1rem;
           }
         }
         .btn {
+          line-height: 1rem;
           border-radius: 5px 0 0 5px;
         }
       }
@@ -281,7 +287,7 @@ export default {
             margin: 10px 0;
             .txt {
               display: inline-block;
-              margin-left: 10px;
+              margin:0 10px;
             }
             span {
               padding: 2px 3px;

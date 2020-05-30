@@ -15,7 +15,9 @@
     </div>
     <div class="service white">
       <h1>商家服务</h1>
-      <p class="mini">支持订单极速退款</p>
+      <p class="mini">
+        <span class="icon">退</span> 支持订单极速退款
+      </p>
     </div>
     <div class="service white flex">
       <h1>营业资质</h1>
@@ -91,6 +93,15 @@ export default {
     .mini {
       font-size: 10px;
       color: #999;
+      .icon{
+        // display: inline-block;
+        // padding: 1px;
+        // line-height: 10px;
+
+        border: 1px solid #eee;
+        border: 1px solid red;
+        border-radius: 2px;
+      }
     }
   }
   .text {

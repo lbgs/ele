@@ -70,10 +70,10 @@
           <meal />
         </van-tab>
         <van-tab title="评价">
-          <appraise/>
+          <appraise />
         </van-tab>
-        <van-tab title="商家" style="height:100vh">
-          <div class="merchant">商家</div>
+        <van-tab title="商家">
+          <storeInfo />
         </van-tab>
       </van-tabs>
     </div>
@@ -82,20 +82,22 @@
 <script>
 import meal from "./meal.vue";
 import appraise from "./appraise.vue";
+import storeInfo from "./storeInfo.vue";
 export default {
   data() {
     return {
       offsetTopArr: null,
-      active: 0,
+      active: 2,
       startY: 0,
       moveY: 0,
       scrollTop: 0,
-      showY: 0,
+      showY: 0
     };
   },
   components: {
     meal,
-    appraise
+    appraise,
+    storeInfo
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);

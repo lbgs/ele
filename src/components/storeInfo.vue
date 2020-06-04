@@ -16,10 +16,13 @@
     <div class="service white">
       <h1>商家服务</h1>
       <p class="mini">
+        <span class="icon">保</span> 该商户已购买食品责任险，食品安全有保障
+      </p>
+      <p class="mini">
         <span class="icon">退</span> 支持订单极速退款
       </p>
     </div>
-    <div class="service white flex">
+    <div class="service acve white flex">
       <h1>营业资质</h1>
       <van-icon name="arrow" />
     </div>
@@ -62,7 +65,7 @@ export default {
 <style lang="scss" scoped>
 .store-control {
   position: relative;
-  background-color: #eee;
+  background-color: #efefef;
   .white {
     background-color: #fff;
     padding: 0 10px;
@@ -89,19 +92,25 @@ export default {
     }
   }
   .service {
-    padding: 5px 10px;
+    padding: 2px 10px;
+    .acve:active {
+      background-color: #cecece;
+    }
     .mini {
-      font-size: 10px;
+      font-size: 0.5rem;
       color: #999;
-      .icon{
-        // display: inline-block;
-        // padding: 1px;
-        // line-height: 10px;
-
+      .icon {
+        display: inline-block;
+        padding: 1px;
+        line-height: 10px;
         border: 1px solid #eee;
-        border: 1px solid red;
         border-radius: 2px;
       }
+    }
+  }
+  .acve {
+    &:active{
+      background-color: #ccc;
     }
   }
   .text {
@@ -110,7 +119,7 @@ export default {
   }
 
   .report {
-    padding: 0 10px 10px;
+    padding: 0 5px 10px;
   }
   h1 {
     font-family: "微软雅黑";

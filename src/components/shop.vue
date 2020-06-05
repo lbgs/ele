@@ -43,7 +43,10 @@
         </div>
         <!-- 隐藏 -->
         <div class="show gradient" :style="`opacity: ${showY/100-0.5};`">
-          <div class="title">优惠</div>
+          <div class="title flex-sb">
+            <span>优惠</span>
+            <van-icon name="arrow-up" />
+          </div>
           <ul class="content">
             <li v-for="item in 5" :key="item">
               <van-tag plain type="danger">标签</van-tag>
@@ -167,6 +170,11 @@ export default {
 }
 .min-height{
   min-height: 93vh;
+}
+.flex-sb{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .fli {
   width: 100px;

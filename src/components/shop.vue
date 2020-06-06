@@ -42,7 +42,7 @@
           <div class="affiche">公告：传承中华美味，专业提供质简餐！</div>
         </div>
         <!-- 隐藏 -->
-        <div class="show gradient" :style="`opacity: ${showY/100-0.5};`">
+        <div class="show gradient" ref="showDis" :style="`opacity: ${showY/100-0.5};`">
           <div class="title flex-sb">
             <span>优惠</span>
             <van-icon name="arrow-up" />
@@ -68,7 +68,7 @@
     </div>
     <!-- 点餐、评价、商家 -->
     <div @touchstart="touchStart" @touchmove="touchMoveDown" @touchend="touchEnd" ref="move">
-      <van-tabs  v-model="active" swipeable sticky color="blue">
+      <van-tabs v-model="active" swipeable sticky color="blue">
         <van-tab class="min-height" title="点餐">
           <meal />
         </van-tab>
@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       offsetTopArr: null,
-      active: 2,
+      active: 1,
       startY: 0,
       moveY: 0,
       scrollTop: 0,
@@ -111,15 +111,18 @@ export default {
     window.removeEventListener("scroll", this.onScroll);
   },
   methods: {
+    // 滑动开始
     touchStart: function(el) {
       this.scrollStatus = this.scrollTop > 0 ? true : false;
       this.startY = el.touches[0].screenY;
     },
+    // 点击上箭头
     btnUp: function(el) {
       let y = this.$refs.show.clientHeight;
       document.body.style.overflow = "auto";
       let time = setInterval(() => {
         if (this.moveY < y) {
+          this.$refs.showDis.style.zIndex = "-1";
           clearInterval(time);
           this.moveY = y;
         }
@@ -127,10 +130,12 @@ export default {
         this.showY -= 20;
       }, 1);
     },
+    // 向下滑动
     touchMoveDown: function(el) {
       if (this.scrollStatus) {
         return true;
       }
+      this.$refs.showDis.style.zIndex = "0";
       this.showY = el.touches[0].screenY - this.startY;
       if (this.showY > 0) {
         el.preventDefault();
@@ -139,6 +144,7 @@ export default {
         return true;
       }
     },
+    // 滑动结束
     touchEnd: function(el) {
       let y = this.$refs.show.clientHeight;
       let seep = this.moveY - y > 100 ? +20 : -10;
@@ -148,6 +154,7 @@ export default {
           if (this.moveY <= y) {
             this.moveY = y + 10;
             this.showY = 0;
+            this.$refs.showDis.style.zIndex = "-1";
           }
           if (this.moveY > 500) {
             document.body.style.overflow = "hidden";
@@ -168,10 +175,10 @@ export default {
 .van-tabs {
   position: static;
 }
-.min-height{
+.min-height {
   min-height: 93vh;
 }
-.flex-sb{
+.flex-sb {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -285,6 +292,7 @@ export default {
       }
       .show {
         text-align: left;
+        z-index: -1;
         .title {
           font-size: 1.1rem;
           font-weight: bold;
@@ -295,7 +303,7 @@ export default {
             margin: 10px 0;
             .txt {
               display: inline-block;
-              margin:0 10px;
+              margin: 0 10px;
             }
             span {
               padding: 2px 3px;

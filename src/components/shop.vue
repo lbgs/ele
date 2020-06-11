@@ -90,7 +90,7 @@ export default {
   data() {
     return {
       offsetTopArr: null,
-      active: 1,
+      active: 0,
       startY: 0,
       moveY: 0,
       scrollTop: 0,

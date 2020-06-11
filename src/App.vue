@@ -32,6 +32,9 @@ export default {
 </script>
 
 <style lang="scss">
+div{
+  font-family: "微软雅黑";
+}
 .my-swipe {
   width: 93vw;
   margin: 0 auto;

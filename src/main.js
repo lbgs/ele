@@ -14,7 +14,7 @@ import router from './router.js'
 import {
   Tabbar, TabbarItem, Search, Col, Row, Icon, Swipe, SwipeItem,
   Grid, GridItem, Tab, Tabs, Divider, Button, Sidebar, SidebarItem, Card, TreeSelect,
-  Sticky, Tag, Rate, Checkbox, CheckboxGroup, Lazyload, Skeleton 
+  Sticky, Tag, Rate, Checkbox, CheckboxGroup, Lazyload, Skeleton, Overlay, Stepper
 } from 'vant';
 import 'vant/lib/index.css'
 Vue.use(Tabbar);
@@ -42,6 +42,8 @@ Vue.use(CheckboxGroup);
 Vue.use(Checkbox);
 Vue.use(Lazyload);
 Vue.use(Skeleton);
+Vue.use(Overlay);
+Vue.use(Stepper);
 
 
 // 过滤器

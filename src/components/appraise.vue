@@ -51,7 +51,7 @@
             <div class="time">{{item.time}}</div>
           </div>
           <div class="rate">
-            <van-rate v-model="item.rate" :size="1" readonly :gutter="2" />
+            <van-rate v-model="item.rate" :size="1" readonly :gutter="12" />
             <span class="zan">{{item.rate ==5?"超赞":''}}</span>
           </div>
           <div class="content" v-html="item.content"></div>
@@ -227,7 +227,7 @@ export default {
       .rate {
         margin: 3px 0;
         .zan {
-          margin-left: 5px;
+          margin-left: 15px;
           color: #ed6615;
         }
       }

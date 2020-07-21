@@ -336,6 +336,7 @@ export default {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "left";
       this.$router.push("search");
+      console.log("git")
     },
     //搜索框失去焦点
     getBlur: function() {

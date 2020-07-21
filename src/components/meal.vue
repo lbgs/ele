@@ -463,6 +463,7 @@ export default {
     }
     .submit {
       background-color: #535356;
+      border: 0;
     }
     .submit.action {
       background-color: #38ca73;

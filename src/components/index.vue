@@ -31,23 +31,50 @@
       />
     </van-sticky>
     <!-- 轮播图 -->
-    <van-swipe class="my-swipe" :autoplay="0" indicator-color="white" height="100px">
-      <van-swipe-item v-for="(item,index) in images" :key="index">
+    <van-swipe
+      class="my-swipe"
+      :autoplay="0"
+      indicator-color="white"
+      height="100px"
+    >
+      <van-swipe-item v-for="(item, index) in images" :key="index">
         <img v-lazy="item" />
       </van-swipe-item>
     </van-swipe>
     <!-- 宫格菜单 -->
     <!-- 一级菜单 -->
     <van-grid :column-num="5" :border="false" :icon-size="45">
-      <van-grid-item v-for="item in gridNoe" :key="item.id" :icon="item.icon" :text="item.name" />
+      <van-grid-item
+        v-for="item in gridNoe"
+        :key="item.id"
+        :icon="item.icon"
+        :text="item.name"
+      />
     </van-grid>
     <!-- 二级菜单 -->
     <van-grid :column-num="5" :border="false">
-      <van-grid-item v-for="item in gridTow" :key="item.id" :icon="item.icon" :text="item.name" />
+      <van-grid-item
+        v-for="item in gridTow"
+        :key="item.id"
+        :icon="item.icon"
+        :text="item.name"
+      />
     </van-grid>
     <!-- 列表 -->
-    <van-tabs v-model="active" sticky :offset-top="searchHight" animated swipeable color="blue">
-      <van-tab class="tab" :title="items.name" v-for="items in data" :key="items.id">
+    <van-tabs
+      v-model="active"
+      sticky
+      :offset-top="searchHight"
+      animated
+      swipeable
+      color="blue"
+    >
+      <van-tab
+        class="tab"
+        :title="items.name"
+        v-for="items in data"
+        :key="items.id"
+      >
         <list :data="items.list"></list>
       </van-tab>
     </van-tabs>
@@ -68,90 +95,90 @@ export default {
         {
           id: 0,
           icon: require("../assets/images/icon (1).jpg"),
-          name: "美食"
+          name: "美食",
         },
         {
           id: 1,
           icon: require("../assets/images/icon (2).jpg"),
-          name: "商超便利"
+          name: "商超便利",
         },
         {
           id: 2,
           icon: require("../assets/images/icon (3).jpg"),
-          name: "水果"
+          name: "水果",
         },
         {
           id: 3,
           icon: require("../assets/images/icon (4).jpg"),
-          name: "跑腿服务"
+          name: "跑腿服务",
         },
         {
           id: 4,
           icon: require("../assets/images/icon (5).jpg"),
-          name: "甜品饮品"
-        }
+          name: "甜品饮品",
+        },
       ],
       gridTow: [
         {
           id: 0,
           icon: require("../assets/images/icon (6).jpg"),
           url: "",
-          name: "下午茶"
+          name: "下午茶",
         },
         {
           id: 1,
           icon: require("../assets/images/icon (7).jpg"),
           url: "",
-          name: "汉堡披萨"
+          name: "汉堡披萨",
         },
         {
           id: 2,
           icon: require("../assets/images/icon (8).jpg"),
           url: "",
-          name: "新店尝鲜"
+          name: "新店尝鲜",
         },
         {
           id: 3,
           icon: require("../assets/images/icon (9).jpg"),
           url: "",
-          name: "买菜"
+          name: "买菜",
         },
         {
           id: 4,
           icon: require("../assets/images/icon (10).jpg"),
           url: "",
-          name: "送药上门"
+          name: "送药上门",
         },
         {
           id: 5,
           icon: require("../assets/images/icon (11).jpg"),
           url: "",
-          name: "星选好店"
+          name: "星选好店",
         },
         {
           id: 6,
           icon: require("../assets/images/icon (12).jpg"),
           url: "",
-          name: "大牌惠吃"
+          name: "大牌惠吃",
         },
         {
           id: 7,
           icon: require("../assets/images/icon (13).jpg"),
           url: "",
-          name: "签到赢钱"
+          name: "签到赢钱",
         },
         {
           id: 8,
           icon: require("../assets/images/icon (14).jpg"),
           url: "",
-          name: "炸鸡烤串"
+          name: "炸鸡烤串",
         },
         {
           id: 9,
           icon: require("../assets/images/icon (15).jpg"),
           url: "",
-          name: "全部分类"
-        }
+          name: "全部分类",
+        },
       ],
       data: [
         {
@@ -168,7 +195,7 @@ export default {
               delivery: { free: true, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 1,
@@ -180,7 +207,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 2,
@@ -192,7 +219,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 3,
@@ -204,7 +231,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 4,
@@ -216,7 +243,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 5,
@@ -228,9 +255,9 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
-            }
-          ]
+              tags: ["20减19", "120减51", "50减22"],
+            },
+          ],
         },
         {
           id: 1,
@@ -246,7 +273,7 @@ export default {
               delivery: { free: true, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 1,
@@ -258,9 +285,9 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
-            }
-          ]
+              tags: ["20减19", "120减51", "50减22"],
+            },
+          ],
         },
         {
           id: 2,
@@ -276,7 +303,7 @@ export default {
               delivery: { free: true, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 1,
@@ -288,7 +315,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 2,
@@ -300,7 +327,7 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
+              tags: ["20减19", "120减51", "50减22"],
             },
             {
               id: 3,
@@ -312,40 +339,40 @@ export default {
               delivery: { free: false, price: 3.5 },
               time: 30,
               distance: 2400,
-              tags: ["20减19", "120减51", "50减22"]
-            }
-          ]
+              tags: ["20减19", "120减51", "50减22"],
+            },
+          ],
         },
         {
           id: 3,
           name: "到点自取",
-          list: []
-        }
+          list: [],
+        },
       ],
-      images: [require("../assets/images/swipe-1.gif"), 2, 3, 4]
+      images: [require("../assets/images/swipe-1.gif"), 2, 3, 4],
     };
   },
   components: {
     tabBar,
-    list
+    list,
   },
-  created: function() {},
+  created: function () {},
   methods: {
     //搜索获得焦点
-    getFocus: function(el) {
+    getFocus: function (el) {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "left";
       this.$router.push("search");
     },
     //搜索框失去焦点
-    getBlur: function() {
+    getBlur: function () {
       let i = document.querySelector("input[type='search']");
       i.style.textAlign = "center";
     },
     //搜索框内容改变
-    getInput: function(el) {
+    getInput: function (el) {
       console.log(el);
-    }
+    },
   },
   mounted() {
     console.log(this.$refs.search.height);
@@ -354,8 +381,8 @@ export default {
   watch: {
     searchVal: (val, old) => {
       console.log(`旧：${old} - 新：${val}`);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -376,6 +403,7 @@ h1 {
       overflow: hidden;
       position: relative;
       font-size: 0.9rem;
+      -webkit-mask-image: linear-gradient(to right, black 75%, transparent);
     }
   }
 }

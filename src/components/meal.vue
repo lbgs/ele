@@ -1,5 +1,5 @@
 <template>
-  <div class="meal" :style="`z-index:${skuShow ? 99: 10};`">
+  <div class="meal" :style="`z-index:${skuShow ? 99 : 10};`">
     <van-swipe class="my-swipe" :autoplay="0" indicator-color="white">
       <van-swipe-item>1</van-swipe-item>
       <van-swipe-item>2</van-swipe-item>
@@ -8,7 +8,11 @@
     </van-swipe>
     <van-sticky :offset-top="44">
       <van-sidebar v-model="activeKey" class="nav-left" @change="scrollTo">
-        <van-sidebar-item :title="item.name" v-for="item in list" :key="item.id" />
+        <van-sidebar-item
+          :title="item.name"
+          v-for="item in list"
+          :key="item.id"
+        />
       </van-sidebar>
     </van-sticky>
     <div
@@ -20,18 +24,18 @@
     >
       <div class="category" v-for="item in list" :key="item.id" ref="category">
         <van-sticky :offset-top="44">
-          <p class="food-name">{{item.name}}</p>
+          <p class="food-name">{{ item.name }}</p>
         </van-sticky>
         <van-card
           class="card"
           v-for="items in item.data"
           :key="items.id"
-          :price="items.price+'.00'"
+          :price="items.price + '.00'"
           origin-price="4.00"
           thumb="https://img.yzcdn.cn/vant/ipad.jpeg"
         >
-          <div class="title spill" slot="title">{{items.name}}</div>
-          <div class="desc font-size spill" slot="desc">{{items.desc}}</div>
+          <div class="title spill" slot="title">{{ items.name }}</div>
+          <div class="desc font-size spill" slot="desc">{{ items.desc }}</div>
           <div class="tags font-size" slot="tags">
             <span>月售</span>
             &nbsp;&nbsp;
@@ -41,7 +45,16 @@
             <van-tag class="font-size" plain type="danger">4.4折</van-tag>
           </div>
           <div class="font-size" slot="origin-price">￥22.00</div>
-          <div class="plus" slot="num" :data-price="items.price" @click.stop="onPlus">+</div>
+          <div
+            class="plus"
+            slot="num"
+            :data-id="items.id"
+            :data-name="items.name"
+            :data-price="items.price"
+            @click.stop="onPlus"
+          >
+            +
+          </div>
         </van-card>
       </div>
     </div>
@@ -57,12 +70,20 @@
               <div class="clear">清空</div>
             </div>
             <ul class="sku-card">
-              <li>
+              <li v-for="item in storeCartList" :key="item.id">
                 <van-row type="flex">
-                  <van-col span="19">奥尔良鸡排饭</van-col>
-                  <van-col span="4">￥15</van-col>
+                  <van-col span="19">{{ item.name }}</van-col>
+                  <van-col span="4">￥{{ item.sumPrice }}</van-col>
                   <van-col span="6">
-                    <van-stepper v-model="number" theme="round" button-size="22" disable-input />
+                    <van-stepper
+                      v-model="item.number"
+                      theme="round"
+                      button-size="22"
+                      disable-input
+                      :name="item.id"
+                      @change="goodsChangeNumber"
+                      min="0"
+                    />
                   </van-col>
                 </van-row>
               </li>
@@ -73,10 +94,14 @@
       <div class="bottomNav">
         <van-row type="flex">
           <van-col span="5" class="icon" @click="onSku">图标</van-col>
-          <van-col span="13" class="text">￥{{sumPrice || "未选购商品"}}</van-col>
-          <van-col span="6" :class="`submit ${sumPrice < 15 || 'action' }`">
+          <van-col span="13" class="text"
+            >￥{{ sumPrice || "未选购商品" }}</van-col
+          >
+          <van-col span="6" :class="`submit ${sumPrice < 15 || 'action'}`">
             <!-- <van-button :type="sumPrice < 15 ?'default' : 'primary'" :color="sumPrice < 15 || '#535356'">{{sumPrice > 15 ? '去结算': '￥15起送'}}</van-button> -->
-            <button type="submit" class="submit">{{sumPrice > 15 ? '去结算': '￥15起送'}}</button>
+            <button type="submit" class="submit">
+              {{ sumPrice > 15 ? "去结算" : "￥15起送" }}
+            </button>
           </van-col>
         </van-row>
       </div>
@@ -97,194 +122,195 @@ export default {
           name: "热销",
           data: [
             {
-              id: 0,
+              id: 100,
               name: "叉烧烧鸭双拼-1",
               desc: "描述信息",
               price: 5.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 1,
+              id: 101,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
-            }
-          ]
+              icon: "",
+            },
+          ],
         },
         {
           id: 1,
           name: "推荐",
           data: [
             {
-              id: 0,
+              id: 200,
               name: "叉烧烧鸭双拼-2",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 1,
+              id: 201,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 2,
+              id: 202,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 3,
+              id: 203,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 4,
+              id: 204,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
-            }
-          ]
+              icon: "",
+            },
+          ],
         },
         {
           id: 2,
           name: "招牌",
           data: [
             {
-              id: 0,
+              id: 300,
               name: "叉烧烧鸭双拼-3",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 1,
+              id: 301,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 2,
+              id: 302,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 3,
+              id: 303,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 4,
+              id: 304,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
-            }
-          ]
+              icon: "",
+            },
+          ],
         },
         {
           id: 3,
           name: "19元套餐",
           data: [
             {
-              id: 0,
+              id: 400,
               name: "叉烧烧鸭双拼-4",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 1,
+              id: 401,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 2,
+              id: 402,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 3,
+              id: 403,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 4,
+              id: 404,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
-            }
-          ]
+              icon: "",
+            },
+          ],
         },
         {
           id: 4,
           name: "29元套餐",
           data: [
             {
-              id: 0,
+              id: 500,
               name: "叉烧烧鸭双拼-5",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 1,
+              id: 501,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 2,
+              id: 502,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 3,
+              id: 503,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
+              icon: "",
             },
             {
-              id: 4,
+              id: 504,
               name: "叉烧烧鸭双拼",
               desc: "描述信息",
               price: 12.0,
-              icon: ""
-            }
-          ]
-        }
+              icon: "",
+            },
+          ],
+        },
       ],
       offsetTopArr: [],
       foodY: 0,
-      status: false
+      status: false,
+      storeCartList: [],
     };
   },
   mounted() {
     window.addEventListener("scroll", this.onScroll);
-    this.offsetTopArr = this.$refs.category.map(item => item.offsetTop);
+    this.offsetTopArr = this.$refs.category.map((item) => item.offsetTop);
     this.foodTop = this.$refs.food.offsetTop;
   },
   destroy() {
@@ -293,16 +319,56 @@ export default {
   },
   methods: {
     // 购物车列表
-    onSku: function() {
-      this.skuShow = !this.skuShow;
+    onSku: function () {
+      if (this.storeCartList.length >= 1) this.skuShow = !this.skuShow;
     },
     //商品添加
-    onPlus: function(e) {
+    onPlus: function (e) {
+      let storeCartList = this.storeCartList;
+      let id = e.target.dataset.id;
+      let name = e.target.dataset.name;
       let price = e.target.dataset.price;
-      console.log(price);
+      let goods = {
+        id,
+        name,
+        price,
+        sumPrice: price,
+        number: 1,
+      };
+
+      if (storeCartList.length <= 0) {
+        storeCartList.push(goods);
+      } else {
+        let flag = storeCartList.some((item) => item.id == id);
+        if (flag) {
+          storeCartList = storeCartList.map((item) => {
+            if (item.id == id) {
+              item.number += 1;
+              item.sumPrice = parseFloat(item.price) * item.number;
+            }
+            return item;
+          });
+        } else {
+          storeCartList.push(goods);
+        }
+      }
       this.sumPrice += parseFloat(price);
+      this.storeCartList = storeCartList;
     },
-    scrollTo: function(e) {
+    // 商品增加和减少
+    goodsChangeNumber: function (e, detail) {
+      let id = detail.name;
+      this.storeCartList = this.storeCartList.filter((item) => {
+        if (item.id == id) {
+          item.number = e;
+          item.sumPrice = item.price * e;
+        }
+        if (item.number != 0) return item;
+      });
+      console.log(this.storeCartList);
+      if (this.storeCartList.length <= 0) this.skuShow = false;
+    },
+    scrollTo: function (e) {
       let setTop = this.offsetTopArr[e] - this.offsetTopArr[0];
       if (this.status) {
         document.documentElement.scrollTop = this.foodTop + setTop;
@@ -327,16 +393,16 @@ export default {
         }
       });
     },
-    touchStart: function(el) {
+    touchStart: function (el) {
       console.log(el.touches[0].screenY);
       this.startY = el.touches[0].screenY;
     },
-    touchMove: function(el) {
+    touchMove: function (el) {
       // console.log(el.touches[0].screenY - this.startY)
       this.foodY = el.touches[0].screenY - this.startY;
       console.log(this.foodY);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" >
